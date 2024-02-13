@@ -66,7 +66,7 @@ def lorenz_integration(image_name, height, width):
 	pix_loc_xy = [(x, y) for x in range(0, upper_bound_x) for y in range(0, upper_bound_y)]
 	random.shuffle(pix_loc_xy)
 
-	file_name = image_name.replace('.png', "") + "_dec.txt"
+	file_name = image_name.replace('.png', "") + "_ENHLSB_dec.txt"
 	with open(file_name, "w") as file: 
 		for item in pix_loc_xy: file.write(f"{item[0]}, {item[1]}\n")
 
@@ -103,31 +103,8 @@ def encode(image_name, secret_data):
 	binary_secret_data = to_bin(NTRU_secret_data)
 	# size of data to hide
 	data_len = len(binary_secret_data)
+	print(f'Data about to encode: {data_len}')
 	
-	# generate the number of pixels based on data len ((len/3) * 2)
-	# np.random.seed(15)
-	# nums_gen = (data_len//3) * 2 
-	# random_numbers = np.random.randint(0, 16, size=nums_gen)
-	# paired_numbers = random_numbers.reshape(-1,2)
-	# pix_loc_xy = [tuple(row) for row in paired_numbers]
-	# set_pix_loc = set(pix_loc_xy)
-	# if len(set_pix_loc) != len(pix_loc_xy):
-	#     dups = len(pix_loc_xy) - len(set_pix_loc)
-	#     print(f"initial list contains {dups} duplicates")
-	#     # REMOVE DUPLICATES
-	#     uniq_pix_loc = []
-	#     for tupl in pix_loc_xy:
-	#         if tupl not in uniq_pix_loc:
-	#             uniq_pix_loc.append(tupl)
-
-	#     while dups != 0:
-	#         gen_nums = np.random.randint(0, 16, size=2)
-	#         pri_nums = gen_nums.reshape(-1,2)
-	#         if pri_nums is not pix_loc_xy:
-	#             uniq_pix_loc += [tuple(row) for row in pri_nums]
-	#             dups -= 1
-	#     # print(f"original: {len(pix_loc_xy)} \tno dupes: {len(uniq_pix_loc)}")
-
 	height, width, channels = image.shape
 	lorenz_integration(image_name, height, width)
 	
@@ -188,8 +165,6 @@ def encode(image_name, secret_data):
 		if decoded_data[-5:] == "=====":
 			break
 	print(f"decoded: {decoded_data[:-5]}")
-	with open("decoded.txt", "w") as file:
-		file.write(decoded_data)
 	return image
 
 def decode(image_name):
@@ -199,7 +174,7 @@ def decode(image_name):
 	binary_data = ""
 
 	pix_loc_xy = []
-	file_name = image_name.replace('_encoded.png', "") + "_dec.txt"
+	file_name = image_name.replace('.png', "") + "_dec.txt"
 	with open(file_name, "r") as file:
 		for line in file:
 			values = line.strip().split(',')
@@ -239,18 +214,25 @@ if __name__ == "__main__":
 		NTRUdecrypt.genPubPriv()
 	if args.encode:
 		# if the encode argument is specified
+		import time
+		start_time = time.time()
+
 		input_image = args.encode
 		print("input_image:", input_image)
 		# split the absolute path and the file
 		path, file = os.path.split(input_image)
 		# split the filename and the image extension
 		filename, ext = file.split(".")
-		output_image = os.path.join(path, f"{filename}_encoded.{ext}")
+		output_image = os.path.join(path, f"{filename}_ENHLSB.{ext}")
 		# encode the data into the image
 		encoded_image = encode(image_name=input_image, secret_data=secret_data)
 		# save the output image (encoded image)
 		cv2.imwrite(output_image, encoded_image)
 		print("[+] Saved encoded image.")
+
+		end_time = time.time()
+		elapsed_time = end_time - start_time
+		print("Elapsed time:", elapsed_time, "seconds")
 	if args.decode:
 		input_image = args.decode
 		
@@ -265,3 +247,4 @@ if __name__ == "__main__":
 		data = NTRUdecrypt.M
 
 		print("[+] Decoded data:", data)
+		

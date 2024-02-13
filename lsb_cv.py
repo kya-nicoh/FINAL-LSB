@@ -94,7 +94,7 @@ if __name__ == "__main__":
         path, file = os.path.split(input_image)
         # split the filename and the image extension
         filename, ext = file.split(".")
-        output_image = os.path.join(path, f"{filename}_encoded.{ext}")
+        output_image = os.path.join(path, f"{filename}_REGLSB.{ext}")
         # encode the data into the image
         encoded_image = encode(image_name=input_image, secret_data=secret_data)
         # save the output image (encoded image)
