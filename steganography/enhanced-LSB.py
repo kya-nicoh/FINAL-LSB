@@ -79,7 +79,7 @@ def encode(image_name, secret_data):
 	print(f"data before: {secret_data}")
 	NTRUencrypt.encryptString(secret_data)
 	NTRU_secret_data = NTRUencrypt.Me
-	print(f"DATA Entered: {NTRU_secret_data}")
+	# print(f"DATA Entered: {NTRU_secret_data}")
 
 	# ==========================
 	# NTRUdecrypt.decryptString(NTRU_secret_data)
@@ -132,7 +132,7 @@ def encode(image_name, secret_data):
 			binary_data += binary_secret_data[data_index]
 			data_index += 1
 
-		# print(f'pixel #{pixel_count} ({x},{y}): \t{pixel}')
+		print(f'pixel #{pixel_count} ({x},{y}): \t{pixel}')
 		pixel_count+=1
 		# if data is encoded, just break out of the loop
 		if data_index >= data_len:
@@ -164,7 +164,7 @@ def encode(image_name, secret_data):
 		decoded_data += chr(int(byte, 2))
 		if decoded_data[-5:] == "=====":
 			break
-	print(f"decoded: {decoded_data[:-5]}")
+	# print(f"decoded: {decoded_data[:-5]}")
 	return image
 
 def decode(image_name):

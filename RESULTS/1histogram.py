@@ -41,14 +41,17 @@ def rgb(image_name):
     plt.legend()
     plt.show()
 
-images_list=['baboon-512x512.png', 'baboon-512x512_ENHLSB.png', ]
+# images_list=['baboon-64x64.png',   'baboon-64x64_ENHLSB.png', 
+#              'baboon-128x128.png', 'baboon-128x128_ENHLSB.png', 
+#              'baboon-256x256.png', 'baboon-256x256_ENHLSB.png', 
+#              'baboon-512x512.png', 'baboon-512x512_ENHLSB.png', ]
 
 # images_list=['lena64base.png',   'lena-64x64_ENHLSB.png', 
 #              'lena128base.png', 'lena-128x128_ENHLSB.png', 
 #              'lena256base.png', 'lena-256x256_ENHLSB.png', 
 #              'lena512base.png', 'lena-512x512_ENHLSB.png', ]
     
-# images_list=['boat512base.png',   'boat-512x512_ENHLSB.png', ]
+images_list=['baboon64base.png',   'baboon-64x64_ENHLSB.png', ]
 
 for images in images_list:
     # grayscale(images)

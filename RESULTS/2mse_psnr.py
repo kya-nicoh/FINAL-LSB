@@ -21,15 +21,15 @@ def mse_psnr(encoded_img, cover_img):
 
     print(f"PSNR: {psnr} dB")
 
-# image_list = [('lena-64x64_ENHLSB.png',   'lena-64x64.png'),
-#               ('lena-128x128_ENHLSB.png', 'lena-128x128.png'),
-#               ('lena-256x256_ENHLSB.png', 'lena-256x256.png'),
-#               ('lena-512x512_ENHLSB.png', 'lena-512x512.png'),]
+images_list=[('baboon-64x64.png',   'baboon-64x64_ENHLSB.png'), 
+             ('baboon-128x128.png',  'baboon-128x128_ENHLSB.png'), 
+             ('baboon-256x256.png',  'baboon-256x256_ENHLSB.png'), 
+             ('baboon-512x512.png',  'baboon-512x512_ENHLSB.png'), ]
 
-images_list=[('lena64base.png',   'lena-64x64.png'), 
-             ('lena128base.png', 'lena-128x128.png'), 
-             ('lena256base.png', 'lena-256x256.png'), 
-             ('lena512base.png', 'lena-512x512.png'), ]
+# images_list=[('baboon64base.png',   'baboon-64x64.png'), 
+#              ('baboon128base.png',  'baboon-128x128.png'), 
+#              ('baboon256base.png',  'baboon-256x256.png'), 
+#              ('baboon512base.png',  'baboon-512x512.png'), ]
 
 for encoded, cover in images_list:
     mse_psnr(encoded, cover)
