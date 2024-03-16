@@ -132,7 +132,7 @@ def encode(image_name, secret_data):
 			binary_data += binary_secret_data[data_index]
 			data_index += 1
 
-		print(f'pixel #{pixel_count} ({x},{y}): \t{pixel}')
+		# print(f'pixel #{pixel_count} ({x},{y}): \t{pixel}')
 		pixel_count+=1
 		# if data is encoded, just break out of the loop
 		if data_index >= data_len:
