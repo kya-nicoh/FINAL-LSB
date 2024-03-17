@@ -231,15 +231,13 @@ if __name__ == "__main__":
 		encoded_image = encode(image_name=input_image, secret_data=secret_data)
 		cv2.imwrite(output_image, encoded_image)
 		nplmageSuperSave = cv2.imread(output_image)
-
 		end_time = time.time()
 		elapsed_time = end_time - start_time
-
 		output_image_heic = os.path.join(path, f"{filename}.heic")
 		def_HEIC = './HEIC/sample1.heic'
-
 		if pillow_heif.is_supported(def_HEIC):
 			heif_file = pillow_heif.open_heif(def_HEIC)
+		# heif_file = pillow_heif.from_pillow(Image.open(input_image))
 
 		heif_file.add_from_pillow(Image.open(output_image))
 		heif_file.save(output_image_heic, quality=-1)
@@ -247,7 +245,7 @@ if __name__ == "__main__":
 		npImageSuperSave = np.asarray(heif_file[1])
 		cv2.imwrite(output_image, nplmageSuperSave)
 
-		# save the output image (encoded image)
+		# save the output image
 		cv2.imwrite(output_image, encoded_image)
 		print("[+] Saved encoded image.")
 
