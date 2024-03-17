@@ -106,5 +106,4 @@ def main():
 		raise Exception("Enter correct input")
 
 if __name__ == '__main__' :
-
 	main()

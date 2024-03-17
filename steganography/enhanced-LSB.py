@@ -1,6 +1,8 @@
 import cv2
 import numpy as np
 import os
+import pillow_heif
+from PIL import Image
 
 from scipy.integrate import solve_ivp
 
@@ -45,7 +47,7 @@ def lorenz_chaos_system(t, xyz, sigma=10, rho=28, beta=8/3):
 
 # width of pic
 def lorenz_integration(image_name, height, width):
-	## Solve the Lorenz system
+	## Lorenz system
 	initial_conditions = [1.0, 1.0, 1.0]
 
 	t_span = (0, 100)
@@ -132,6 +134,7 @@ def encode(image_name, secret_data):
 			binary_data += binary_secret_data[data_index]
 			data_index += 1
 
+		# Randomized Embedding
 		# print(f'pixel #{pixel_count} ({x},{y}): \t{pixel}')
 		pixel_count+=1
 		# if data is encoded, just break out of the loop
@@ -226,13 +229,34 @@ if __name__ == "__main__":
 		output_image = os.path.join(path, f"{filename}_ENHLSB.{ext}")
 		# encode the data into the image
 		encoded_image = encode(image_name=input_image, secret_data=secret_data)
+		cv2.imwrite(output_image, encoded_image)
+		nplmageSuperSave = cv2.imread(output_image)
+
+		end_time = time.time()
+		elapsed_time = end_time - start_time
+
+		output_image_heic = os.path.join(path, f"{filename}.heic")
+		def_HEIC = './HEIC/sample1.heic'
+
+		if pillow_heif.is_supported(def_HEIC):
+			heif_file = pillow_heif.open_heif(def_HEIC)
+
+		heif_file.add_from_pillow(Image.open(output_image))
+		heif_file.save(output_image_heic, quality=-1)
+		heif_file = pillow_heif.open_heif(output_image_heic, convert_hdr_to_8bit=False, bgr_mode=True)
+		npImageSuperSave = np.asarray(heif_file[1])
+		cv2.imwrite(output_image, nplmageSuperSave)
+
 		# save the output image (encoded image)
 		cv2.imwrite(output_image, encoded_image)
 		print("[+] Saved encoded image.")
 
-		end_time = time.time()
-		elapsed_time = end_time - start_time
+		print("number of images in file:", len(heif_file))
+		for img in heif_file:
+			print(img)
+		
 		print("Elapsed time:", elapsed_time, "seconds")
+
 	if args.decode:
 		input_image = args.decode
 		
