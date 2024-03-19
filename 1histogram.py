@@ -1,8 +1,6 @@
 import cv2
 import matplotlib.pyplot as plt
 
-
-
 def grayscale(image_name):
     # Load the image
     image_gray = cv2.imread(image_name, cv2.IMREAD_GRAYSCALE)
@@ -41,10 +39,10 @@ def rgb(image_name):
     plt.legend()
     plt.show()
 
-# images_list=['baboon-64x64.png',   'baboon-64x64_ENHLSB.png', 
-#              'baboon-128x128.png', 'baboon-128x128_ENHLSB.png', 
-#              'baboon-256x256.png', 'baboon-256x256_ENHLSB.png', 
-#              'baboon-512x512.png', 'baboon-512x512_ENHLSB.png', ]
+images_list=['./RESULTS/baboon-64x64.png',   './RESULTS/baboon-64x64_ENHLSB.png', 
+             './RESULTS/baboon-128x128.png', './RESULTS/baboon-128x128_ENHLSB.png', 
+             './RESULTS/baboon-256x256.png', './RESULTS/baboon-256x256_ENHLSB.png', 
+             './RESULTS/baboon-512x512.png', './RESULTS/baboon-512x512_ENHLSB.png', ]
 
 # images_list=['lena64base.png',   'lena-64x64_ENHLSB.png', 
 #              'lena128base.png', 'lena-128x128_ENHLSB.png', 

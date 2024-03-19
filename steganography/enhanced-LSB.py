@@ -3,9 +3,7 @@ import numpy as np
 import os
 import pillow_heif
 from PIL import Image
-
 from scipy.integrate import solve_ivp
-
 from NTRU.NTRUencrypt import NTRUencrypt
 from NTRU.NTRUdecrypt import NTRUdecrypt
 from NTRU.NTRUutil import *
@@ -45,7 +43,6 @@ def lorenz_chaos_system(t, xyz, sigma=10, rho=28, beta=8/3):
 	dzdt = x * y - beta * z
 	return [dxdt, dydt, dzdt]
 
-# width of pic
 def lorenz_integration(image_name, height, width):
 	## Lorenz system
 	initial_conditions = [1.0, 1.0, 1.0]
@@ -269,4 +266,3 @@ if __name__ == "__main__":
 		data = NTRUdecrypt.M
 
 		print("[+] Decoded data:", data)
-		
