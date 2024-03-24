@@ -49,7 +49,7 @@ images_list=['./RESULTS/baboon-64x64.png',   './RESULTS/baboon-64x64_ENHLSB.png'
 #              'lena256base.png', 'lena-256x256_ENHLSB.png', 
 #              'lena512base.png', 'lena-512x512_ENHLSB.png', ]
     
-images_list=['baboon64base.png',   'baboon-64x64_ENHLSB.png', ]
+# images_list=['baboon64base.png',   'baboon-64x64_ENHLSB.png', ]
 
 for images in images_list:
     # grayscale(images)
